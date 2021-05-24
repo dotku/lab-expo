@@ -6,18 +6,26 @@ import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 
 export default function TabOneScreen() {
+  const [textInputHeight, setTextInputHeight] = React.useState(0);
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      />
       <TextInput
+        multiline
         autoFocus={true}
+        onContentSizeChange={(e) => {
+          setTextInputHeight(e.nativeEvent.contentSize.height);
+        }}
         placeholder="here is a input"
-        style={{ padding: 4 }}
+        style={{
+          marginTop: 8,
+          padding: 4,
+          borderBottomWidth: 1,
+          display: "flex",
+          outlineStyle: "none",
+          width: 800,
+          maxWidth: "80%",
+          height: Math.max(35, textInputHeight),
+        }}
       />
     </View>
   );
@@ -27,15 +35,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
   },
   title: {
+    marginVertical: 30,
     fontSize: 20,
     fontWeight: "bold",
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
   },
 });
