@@ -14,6 +14,12 @@ export default function TabOneScreen() {
   return (
     <View style={styles.container}>
       <TextInput
+        onKeyPress={(e) => {
+          // @ts-ignore
+          if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+            alert("published");
+          }
+        }}
         multiline
         autoFocus={true}
         placeholder={"TextInput"}
@@ -21,6 +27,7 @@ export default function TabOneScreen() {
         onContentSizeChange={(e) => {
           setTextInputHeight(e.nativeEvent.contentSize.height);
         }}
+        // @ts-ignore
         style={{ outline: "none", height: Math.max(35, textInputHeight) }}
       />
       <Text style={styles.title}>Tab One</Text>
